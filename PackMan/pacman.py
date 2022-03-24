@@ -5,7 +5,7 @@
     1. Change the board. -- Done
     2. Change the number of ghosts. -- Done
     3. Change where pacman starts. -- Done
-    4. Make the ghosts faster/slower.
+    4. Make the ghosts faster/slower. -- Done
     5. Make the ghosts smarter.
 """
 
@@ -141,10 +141,10 @@ def move():
             point.move(course)
         else:
             options = [
-                vector(5, 0),
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
+                vector(10, 0),
+                vector(-10, 0),
+                vector(0, 10),
+                vector(0, -10),
             ]
             plan = choice(options)
             course.x = plan.x
@@ -177,10 +177,10 @@ writer.goto(160, 160)
 writer.color('white')
 writer.write(state['score'])
 listen()
-onkey(lambda: change(5, 0), 'Right')
-onkey(lambda: change(-5, 0), 'Left')
-onkey(lambda: change(0, 5), 'Up')
-onkey(lambda: change(0, -5), 'Down')
+onkey(lambda: change(10, 0), 'Right')
+onkey(lambda: change(-10, 0), 'Left')
+onkey(lambda: change(0, 10), 'Up')
+onkey(lambda: change(0, -10), 'Down')
 world()
 move()
 done()
