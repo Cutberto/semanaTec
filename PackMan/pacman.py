@@ -4,7 +4,7 @@
 
     1. Change the board. -- Done
     2. Change the number of ghosts.
-    3. Change where pacman starts.
+    3. Change where pacman starts. -- Done
     4. Make the ghosts faster/slower.
     5. Make the ghosts smarter.
 """
@@ -18,8 +18,8 @@ from freegames import floor, vector
 state = {'score': 0}
 path = Turtle(visible=False)
 writer = Turtle(visible=False)
-aim = vector(5, 0)
-pacman = vector(-40, -80)
+aim = vector(0, 0)
+pacman = vector(0, 0)
 ghosts = [
     [vector(-180, 160), vector(5, 0)],
     [vector(-180, -160), vector(0, 5)],
@@ -75,7 +75,10 @@ def offset(point):
 
 
 def valid(point):
-    """Return True if point is valid in tiles."""
+    """
+        Return True if point is valid in tiles.
+        @point is a X and Y position vector
+    """
     index = offset(point)
 
     if tiles[index] == 0:
@@ -105,7 +108,7 @@ def world():
             if tile == 1:
                 path.up()
                 path.goto(x + 10, y + 10)
-                path.dot(2, 'white')
+                path.dot(3, 'yellow')
 
 
 def move():
