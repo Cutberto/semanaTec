@@ -12,7 +12,7 @@ from turtle import *
 
 from freegames import line
 
-
+# This function draws the grid in the display
 def grid():
     """Draw tic-tac-toe grid."""
     line(-67, 200, -67, -200)
@@ -21,12 +21,13 @@ def grid():
     line(-200, 67, 200, 67)
 
 
+# This functions draws the X for player #1
 def drawx(x, y):
     """Draw X player."""
     line(x, y, x + 133, y + 133)
     line(x, y + 133, x + 133, y)
 
-
+# This function draws the o for player #2
 def drawo(x, y):
     """Draw O player."""
     up()
@@ -34,12 +35,14 @@ def drawo(x, y):
     down()
     circle(62)
 
-
+# This function returns the value rounded down
 def floor(value):
     """Round value down to grid with square size 133."""
     return ((value + 200) // 133) * 133 - 200
 
 
+# These variables contain the turn of the player and
+# and array of both players
 state = {'player': 0}
 players = [drawx, drawo]
 
