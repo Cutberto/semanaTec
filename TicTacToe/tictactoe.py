@@ -56,8 +56,10 @@ def tap(x, y):
     draw = players[player]
     if (player):
         pencolor("red")
+        width(2)
     else:
         pencolor("blue")
+        width(4)
     draw(x, y)
     update()
     state['player'] = not player
