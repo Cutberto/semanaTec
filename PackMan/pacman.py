@@ -6,7 +6,7 @@
     2. Change the number of ghosts. -- Done
     3. Change where pacman starts. -- Done
     4. Make the ghosts faster/slower. -- Done
-    5. Make the ghosts smarter.
+    5. Make the ghosts smarter. -- 
 """
 
 from random import choice
@@ -21,12 +21,12 @@ writer = Turtle(visible=False)
 aim = vector(0, 0)
 pacman = vector(0, 0)
 ghosts = [
-    [vector(-180, 160), vector(5, 0)],
-    [vector(-180, -160), vector(0, 5)],
-    [vector(100, 160), vector(0, -5)],
-    [vector(100, -160), vector(-5, 0)],
-    [vector(-180, 0), vector(5, 0)],
-    [vector(100, 0), vector(5, 0)]
+    [vector(-180, 160), vector(5, 0), 'pink'],
+    [vector(-180, -160), vector(0, 5), 'red'],
+    [vector(100, 160), vector(0, -5), 'green'],
+    [vector(100, -160), vector(-5, 0), 'purple'],
+    [vector(-180, 0), vector(5, 0), 'blue'],
+    [vector(100, 0), vector(5, 0), 'white']
 ]
 # fmt: off
 tiles = [
@@ -136,7 +136,7 @@ def move():
     goto(pacman.x + 10, pacman.y + 10)
     dot(20, 'yellow')
 
-    for point, course in ghosts:
+    for point, course, color in ghosts:
         if valid(point + course):
             point.move(course)
         else:
@@ -152,11 +152,11 @@ def move():
 
         up()
         goto(point.x + 10, point.y + 10)
-        dot(20, 'red')
+        dot(20, color)
 
     update()
 
-    for point, course in ghosts:
+    for point, course, color in ghosts:
         if abs(pacman - point) < 20:
             return
 
