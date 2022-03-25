@@ -20,7 +20,10 @@ state = {'score': 0}
 path = Turtle(visible=False)
 writer = Turtle(visible=False)
 aim = vector(0, 0)
-pacman = vector(0, 0)
+pacman = vector(0, 0)  # Posición base de Pacman
+# Se definen todos los fantasmas, con vectores Posicion X,Y
+# un segundo vector para definir el movimiento y
+# un tercero para definir el color
 ghosts = [
     [vector(-180, 160), vector(5, 0), 'pink'],
     [vector(-180, -160), vector(0, 5), 'red'],
@@ -30,6 +33,7 @@ ghosts = [
     [vector(100, 0), vector(5, 0), 'white']
 ]
 # fmt: off
+# Definimos todo el tablero, 0 para pared 1 para corredor
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
@@ -67,12 +71,17 @@ def square(x, y):
         path.left(90)
 
     path.end_fill()
+
+
+# Ajuste para imprimir en pantalla matriz "tiles"
 def offset(point):
     """Return offset of point in tiles."""
     x = (floor(point.x, 20) + 200) / 20
     y = (180 - floor(point.y, 20)) / 20
     index = int(x + y * 20)
     return index
+
+
 def valid(point):
     """
         Return True if point is valid in tiles.
@@ -89,35 +98,44 @@ def valid(point):
         return False
 
     return point.x % 20 == 0 or point.y % 20 == 0
+
+
 def world():
     """Draw world using path."""
-    bgcolor('black')
-    path.color('gray')
+    bgcolor('black')  # Color de Fondo
+    path.color('gray')  # Color de Pasillos
 
     for index in range(len(tiles)):
         tile = tiles[index]
-
+        #  Dibuja los pasillos
         if tile > 0:
             x = (index % 20) * 20 - 200
             y = 180 - (index // 20) * 20
             square(x, y)
-
+            # Dibuja los puntos Dorados
             if tile == 1:
                 path.up()
                 path.goto(x + 10, y + 10)
                 path.dot(3, 'yellow')
+
+
 def move():
     """Move pacman and all ghosts."""
     writer.undo()
     writer.write(state['score'])
 
     clear()
-
+    onkey(lambda: change(10, 0), 'Right')
+    onkey(lambda: change(-10, 0), 'Left')
+    onkey(lambda: change(0, 10), 'Up')
+    onkey(lambda: change(0, -10), 'Down')
+    # Chequeo de movimiento de Pacman
     if valid(pacman + aim):
         pacman.move(aim)
 
     index = offset(pacman)
 
+    # Come el Punto Amarillo y aumenta el Marcador
     if tiles[index] == 1:
         tiles[index] = 2
         state['score'] += 1
@@ -127,12 +145,14 @@ def move():
 
     up()
     goto(pacman.x + 10, pacman.y + 10)
-    dot(20, 'yellow')
+    dot(20, 'yellow')  # Dibuja a Pacman
 
+    # Proceso para dibujar y mover a los fantasmas
     for point, course, color in ghosts:
         if valid(point + course):
             point.move(course)
         else:
+            # Vector de velocidades para fantasmas
             options = [
                 vector(10, 0),
                 vector(-10, 0),
@@ -166,6 +186,8 @@ def move():
             return
 
     ontimer(move, 100)
+
+
 def change(x, y):
     """Change pacman aim if valid."""
     if valid(pacman + vector(x, y)):
@@ -180,10 +202,7 @@ writer.goto(160, 160)
 writer.color('white')
 writer.write(state['score'])
 listen()
-onkey(lambda: change(10, 0), 'Right')
-onkey(lambda: change(-10, 0), 'Left')
-onkey(lambda: change(0, 10), 'Up')
-onkey(lambda: change(0, -10), 'Down')
+# Velocidades para PacMan
 world()
 move()
 done()
