@@ -38,7 +38,7 @@ def floor(value):
 # and array of both players
 state = {'player': 0}
 players = [drawx, drawo]
-# matrix to determine if a block is occupied
+# Matrix to determine if a block is occupied
 isUsed = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
 
@@ -55,7 +55,7 @@ def tap(x, y):
     else:
         pencolor("blue")
         width(4)
-
+    #Conditional structure to check if a place is used
     if x == -200.0 and y == 66.0:
         if not isUsed[0][0]:
             draw(x, y)
