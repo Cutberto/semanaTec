@@ -6,7 +6,7 @@
     2. Change the number of ghosts. -- Done
     3. Change where pacman starts. -- Done
     4. Make the ghosts faster/slower. -- Done
-    5. Make the ghosts smarter. -- 
+    5. Make the ghosts smarter. -- Done
 """
 
 from random import choice
@@ -146,7 +146,14 @@ def move():
                 vector(0, 10),
                 vector(0, -10),
             ]
-            plan = choice(options)
+            # Revisar posicion de pacman
+            difx = pacman.x - point.x
+            dify = pacman.y - point.y
+            if dify > 0 and valid(point + options[2]): plan = options[2]
+            elif dify < 0 and valid(point.y + options[3]): plan = options[3]
+            elif difx > 0 and valid(point.x + options[0]): plan = options[0]
+            elif difx < 0 and valid(point.x + options[1]): plan = options[1]
+            else: plan = choice(options)
             course.x = plan.x
             course.y = plan.y
 
