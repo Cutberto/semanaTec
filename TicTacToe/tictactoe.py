@@ -45,7 +45,8 @@ def floor(value):
 # and array of both players
 state = {'player': 0}
 players = [drawx, drawo]
-
+# matrix to determine if a block is occupied
+isUsed = [[0,0,0], [0,0,0], [0,0,0]] 
 
 def tap(x, y):
 
@@ -60,9 +61,59 @@ def tap(x, y):
     else:
         pencolor("blue")
         width(4)
-    draw(x, y)
+
+
+    
+
+    if x == -200.0 and y == 66.0:
+        if not isUsed[0][0]:
+            draw(x, y)
+            isUsed[0][0] = 1
+            state['player'] = not player
+    elif x == -67.0 and y == 66.0:
+        if not isUsed[0][1]:
+            draw(x, y)
+            isUsed[0][1] = 1
+            state['player'] = not player
+    elif x == 66.0 and y == 66.0:
+        if not isUsed[0][2]:
+            draw(x, y)
+            isUsed[0][2] = 1
+            state['player'] = not player
+    elif x == -200.0 and y == -67.0:
+        if not isUsed[1][0]:
+            draw(x, y)
+            isUsed[1][0] = 1
+            state['player'] = not player
+    elif x == -67.0 and y == -67.0:
+        if not isUsed[1][1]:
+            draw(x, y)
+            isUsed[1][1] = 1
+            state['player'] = not player
+    elif x == 66.0 and y == -67.0:
+        if not isUsed[1][2]:
+            draw(x, y)
+            isUsed[1][2] = 1
+            state['player'] = not player
+    elif x == -200.0 and y == -200.0:
+        if not isUsed[2][0]:
+            draw(x, y)
+            isUsed[2][0] = 1
+            state['player'] = not player
+    elif x == -67.0 and y == -200.0:
+        if not isUsed[2][1]:
+            draw(x, y)
+            isUsed[2][1] = 1
+            state['player'] = not player
+    elif x == 66.0 and y == -200.0:
+        if not isUsed[2][2]:
+            draw(x, y)
+            isUsed[2][2] = 1
+            state['player'] = not player
+
+
     update()
-    state['player'] = not player
+    
 
 
 
