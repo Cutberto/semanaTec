@@ -14,6 +14,7 @@ from turtle import *
 
 from freegames import path
 
+is_done = False # definir todos los cuadros destapados como falso
 count = 0 # empezar contador en 0
 car = path('car.gif')
 tiles = list(range(32)) * 2
@@ -93,3 +94,5 @@ tracer(False)
 onscreenclick(tap)
 draw()
 done()
+
+is_done = True #Detectar cuando todos los cuadros se han destapado
