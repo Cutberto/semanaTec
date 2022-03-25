@@ -8,12 +8,13 @@ Exercises:
 4. Center single-digit tile.
 5. Use letters instead of tiles.
 """
-
+"""importar las librerias necesarias"""
 from random import *
 from turtle import *
 
 from freegames import path
 
+count = 0 # empezar contador en 0
 car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None}
@@ -50,10 +51,13 @@ def tap(x, y):
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
+        count += 1 # contar número de taps
     else:
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+
+    print "Número de taps: ", count # mostrar número de taps realizados
 
 
 def draw():
